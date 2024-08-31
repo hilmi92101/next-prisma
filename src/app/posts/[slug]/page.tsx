@@ -6,7 +6,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
     const post = await prisma.post.findUnique({
         where: {
-            id: params.id
+            slug: params.slug
         }
     });
 

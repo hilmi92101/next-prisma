@@ -1,6 +1,6 @@
 
 export interface PostPageParams {
-    id: string;
+    slug: string;
 }
 export interface PostPageProps {
     params: PostPageParams;
