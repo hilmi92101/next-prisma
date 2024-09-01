@@ -10,7 +10,15 @@ import CreatePostForm from "@/components/CreatePostForm";
 
 export default async function PostsPage() {
 
-    const posts = await prisma.post.findMany();
+    //const posts = await prisma.post.findMany();
+    const user = await prisma.user.findUnique({
+        where: {
+            email: "john@gmail.com"
+        },
+        include: {
+            posts: true
+        }
+    })
 
     const postsCount = await prisma.post.count();
 
@@ -24,7 +32,7 @@ export default async function PostsPage() {
                 <main>
                     <div className="p-4">
                         <ul className="list-disc list-inside">
-                            {posts.map((post, index) => (
+                            {user?.posts.map((post, index) => (
                                 <li>
                                     <Link href={`posts/${post.slug}`} className="cursor-pointer text-blue-500">{post.title}</Link>
                                 </li>

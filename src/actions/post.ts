@@ -18,6 +18,11 @@ export const createPost = async (e: FormData) => {
             title: title,
             slug: slug,
             content: content,
+            author: {
+                connect: {
+                    email: "john@gmail.com"
+                }
+            }
         }
     })
 
