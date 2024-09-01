@@ -4,25 +4,13 @@ import Link from "next/link";
 // lib
 import prisma from "@/lib/prisma-singleton";
 
+// component
+import CreatePostForm from "@/components/CreatePostForm";
+
 
 export default async function PostsPage() {
 
-    const posts = await prisma.post.findMany({
-        where: {
-            published: true,
-            // title: {
-            //     contains: 'Zom'
-            // }
-        },
-        orderBy: {
-            createdAt: 'desc'
-        },
-        select: {
-            id: true,
-            title: true,
-            slug: true,
-        },
-    });
+    const posts = await prisma.post.findMany();
 
     const postsCount = await prisma.post.count();
 
@@ -43,6 +31,8 @@ export default async function PostsPage() {
                             ))}
                         </ul>
                     </div>
+
+                    <CreatePostForm />
                 </main>
             </div>
         </div>
