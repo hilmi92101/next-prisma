@@ -32,7 +32,9 @@ model Post {
   slug      String   @unique
   summary   String?  @db.TinyText
   content   String   @db.Text
+  remarks   String?  @db.Text
   published Boolean? @default(false)
+  reviewed  Boolean? @default(false)
 
   author   User?   @relation(fields: [authorId], references: [id])
   authorId String?
