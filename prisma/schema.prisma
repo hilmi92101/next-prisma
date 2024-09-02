@@ -14,16 +14,23 @@ datasource db {
 }
 
 model User {
-  id             String @id @default(cuid())
-  email          String @unique
+  id             String   @id @default(cuid())
+  username       String?  @unique
+  email          String   @unique
   hashedPassword String
-  posts          Post[]
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  posts Post[]
+
+  @@map("users")
 }
 
 model Post {
   id        String   @id @default(cuid())
   title     String
   slug      String   @unique
+  summary   String?  @db.TinyText
   content   String   @db.Text
   published Boolean? @default(false)
 
